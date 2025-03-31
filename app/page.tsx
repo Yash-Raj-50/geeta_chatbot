@@ -29,7 +29,7 @@ const Home = () => {
       <div
         className="col-span-12 lg:col-span-5 lg:col-start-7 h-full p-4 overflow-auto bg-cover bg-center bg-no-repeat flex flex-col justify-between"
         style={{
-          backgroundImage: "url('/static/gita_painting_NoBG.png')",
+          backgroundImage: "url('/media/gita_painting_NoBG.png')",
           // boxShadow: "inset 0 0 0 2000px rgba(0, 0, 0, 0.1)" // Light overlay for readability
         }}
       >
