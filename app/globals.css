@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    font-family: sans-serif;
+    /* color: #333; */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Continuous flowing paths (no dash array) */
+  .squiggly-continuous-1 {
+    animation: colorShift1 8s linear infinite;
+    /* No stroke-dasharray - this makes it continuous */
+  }
+  
+  .squiggly-continuous-2 {
+    animation: colorShift2 8s linear infinite;
+    /* No stroke-dasharray */
+  }
+  
+  .squiggly-continuous-3 {
+    animation: colorShift3 8s linear infinite;
+    /* No stroke-dasharray */
+  }
+}
+
+/* Just color animations now, not position - blue-purple spectrum only */
+@keyframes colorShift1 {
+  0% {
+    filter: hue-rotate(-30deg) brightness(1);
+  }
+  50% {
+    filter: hue-rotate(30deg) brightness(1.2);
+  }
+  100% {
+    filter: hue-rotate(-30deg) brightness(1);
+  }
+}
+
+@keyframes colorShift2 {
+  0% {
+    filter: hue-rotate(30deg) brightness(1);
+  }
+  50% {
+    filter: hue-rotate(-30deg) brightness(1.2);
+  }
+  100% {
+    filter: hue-rotate(30deg) brightness(1);
+  }
+}
+
+@keyframes colorShift3 {
+  0% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  50% {
+    filter: hue-rotate(60deg) brightness(1.2);
+  }
+  100% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
 }
