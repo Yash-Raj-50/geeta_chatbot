@@ -17,6 +17,11 @@
   }
 }
 
+.rightImagePane {
+  background: url('/media/gita_painting_noBG.png') no-repeat center;
+  background-size: cover;
+}
+
 @layer utilities {
   /* Continuous flowing paths (no dash array) */
   .squiggly-continuous-1 {
