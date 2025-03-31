@@ -4,6 +4,15 @@ import {
   RetrieveAndGenerateStreamCommand,
 } from '@aws-sdk/client-bedrock-agent-runtime';
 
+interface ChatMessage {
+  role: string;
+  content: string;
+}
+
+interface ChunkData {
+  bytes: Uint8Array;
+}
+
 // Initialize the Bedrock Agent Runtime client for knowledge base access
 const bedrockAgentRuntime = new BedrockAgentRuntimeClient({
   region: process.env.AWS_REGION || 'us-east-1',
@@ -14,7 +23,7 @@ const bedrockAgentRuntime = new BedrockAgentRuntimeClient({
 });
 
 // In-memory store for conversation history
-const conversationStore = new Map<string, any[]>();
+const conversationStore = new Map<string, ChatMessage[]>();
 
 export async function POST(request: NextRequest) {
   try {
@@ -90,9 +99,10 @@ export async function POST(request: NextRequest) {
               console.log('Retrieval result:', item.retrievalResult);
             }
             // Handle chunk format as a fallback
-            else if ('chunk' in item && item.chunk && (item.chunk as any).bytes) {
+            else if ('chunk' in item && item.chunk && 'bytes' in (item.chunk as ChunkData)) {
               const decoder = new TextDecoder();
-              const jsonString = decoder.decode((item.chunk as any).bytes);
+              const chunk = item.chunk as ChunkData;
+              const jsonString = decoder.decode(chunk.bytes);
               console.log('Chunk data:', jsonString.substring(0, 100) + '...');
               
               try {

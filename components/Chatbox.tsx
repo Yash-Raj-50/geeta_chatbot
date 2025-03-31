@@ -33,7 +33,7 @@ const ChatBox = ({ selectedQuestion, onQuestionProcessed }: ChatBoxProps) => {
         onQuestionProcessed();
       }
     }
-  }, [selectedQuestion]);
+  }, [selectedQuestion, onQuestionProcessed]);
 
 
   const scrollToBottom = () => {
